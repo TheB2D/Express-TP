@@ -1,0 +1,9 @@
+name: ExpressTp
+version: ${project.version}
+main: com.theb2d.expresstp.ExpressTp
+api-version: 1.17.1
+authors: [ TheB2D ]
+commands:
+  etp:
+    description: tp to a target with a corresponding payment
+    usage: /<command> <player>
