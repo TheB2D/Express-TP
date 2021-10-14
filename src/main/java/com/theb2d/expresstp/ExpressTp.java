@@ -14,7 +14,7 @@ public final class ExpressTp extends JavaPlugin {
         TPrequest command = new TPrequest();
         events = new Events(this);
         getServer().getPluginManager().registerEvents(events, this);
-        getServer().getConsoleSender().sendMessage("[ExpressTP] Plugin v0.5 has been enabled" + ChatColor.GREEN);
+        getServer().getConsoleSender().sendMessage("[ExpressTP] Plugin has been enabled" + ChatColor.GREEN);
         getCommand("etp").setExecutor(command);
         this.saveDefaultConfig();
         this.getConfig().addDefault("tp.multiplier", 1);
@@ -23,7 +23,7 @@ public final class ExpressTp extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        getServer().getConsoleSender().sendMessage("[ExpressTP] Plugin v0.5 has been disabled" + ChatColor.RED);
+        getServer().getConsoleSender().sendMessage("[ExpressTP] Plugin has been disabled" + ChatColor.RED);
     }
 
 }
