@@ -52,7 +52,6 @@ public class Events implements Listener {
                     }.runTask(plugin);
                     sender.getInventory().removeItem(new ItemStack(Material.DIAMOND, amount));
                     sender.playSound(sender.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0F, 1.0F);
-                    Bukkit.getServer().getConsoleSender().sendMessage("Current multiplier: " + Integer.toString(multiplier));
                     sender.sendMessage("§l§e(!)§r§7 You have successfully been teleported to " + target.getDisplayName() + "! " + Integer.toString(amount) + " diamonds has been deducted from you!");
                 }
 

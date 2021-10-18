@@ -7,3 +7,6 @@ commands:
   etp:
     description: tp to a target with a corresponding payment
     usage: /<command> <player>
+  ltp:
+    description: tp to a location with a corresponding payment
+    usage: /<command> <player>
