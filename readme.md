@@ -2,9 +2,14 @@
 
 Looking for an alternative to nether portal highways in your SMP? Express-TP is a teleportation plugin that prompts you to pay a corresponding amount for teleporting to a certain player.
 
-- **/etp <player to teleport to>**
+- **/etp (player to teleport to)**
   - The command executor will be prompted to pay the respective amount of diamonds
-- Permission needed: **etp.use**
+- Permission needed: **etp.use**  
+- **/ltp (second arg : action or location)**
+  - Second args: (list, create, remove)
+  
+- Permission needed: **ltp.use**
+
 
 **Express-TP is:**
 - **Customizable** (customize the default payment)

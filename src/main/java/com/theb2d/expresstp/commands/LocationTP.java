@@ -26,20 +26,25 @@ public class LocationTP implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        Player player = (Player) sender;
-        File file = new File("locations.yml");
-        FileConfiguration locations = YamlConfiguration.loadConfiguration(file);
-        if(!(sender instanceof Player)){
-            sender.getServer().getConsoleSender().sendMessage("You are not a player");
-            return true;
-        }
-
-        if(args.length==0){
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&l&e(!)&r&c Usage:&7 /ltp <location or action>"));
-            return true;
-        }
-
         if(command.getName().equalsIgnoreCase("ltp")){
+            Player player = (Player) sender;
+
+            if(!(player.hasPermission("ltp.use"))){
+                player.sendMessage("§l§e(!)§r§c You are missing the required permission: §rltp.use§r§c to use this command!");
+                return true;
+            }
+
+            File file = new File("locations.yml");
+            FileConfiguration locations = YamlConfiguration.loadConfiguration(file);
+            if(!(sender instanceof Player)){
+                sender.getServer().getConsoleSender().sendMessage("You are not a player");
+                return true;
+            }
+
+            if(args.length==0){
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&l&e(!)&r&c Usage:&7 /ltp <location or action>"));
+                return true;
+            }
             if(args[0].equalsIgnoreCase("create")){
 
                 Location loc = player.getLocation();
@@ -49,7 +54,7 @@ public class LocationTP implements CommandExecutor {
                     try {
                         file.createNewFile();
                     }catch(IOException e){
-                        Bukkit.getServer().getConsoleSender().sendMessage("SUS!");
+                        Bukkit.getServer().getConsoleSender().sendMessage(e.getMessage());
                     }
                 }
 
@@ -57,7 +62,7 @@ public class LocationTP implements CommandExecutor {
                 try{
                     locations.save(file);
                 }catch(IOException e){
-                    Bukkit.getServer().getConsoleSender().sendMessage("ERROR!!!");
+                    Bukkit.getServer().getConsoleSender().sendMessage(e.getMessage());
                 }
 
 
@@ -72,7 +77,7 @@ public class LocationTP implements CommandExecutor {
                     try{
                         locations.save(file);
                     }catch(IOException e){
-                        Bukkit.getServer().getConsoleSender().sendMessage("ERROR!!!");
+                        Bukkit.getServer().getConsoleSender().sendMessage(e.getMessage());
                     }
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&l&e(!)&r&a Successfully deleted warp " + loc));
                 }else if(!locations.contains(loc)){
