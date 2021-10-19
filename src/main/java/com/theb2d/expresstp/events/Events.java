@@ -38,9 +38,9 @@ public class Events implements Listener {
                 FileConfiguration config = mainClass.getConfig(); //config
 
                 int default_amount = config.getInt("tp.default_amount");
-                int multiplier = config.getInt("tp.multiplier");
-                int distance = (int) sender.getLocation().distance(target.getLocation());
-                int amount = (distance*multiplier)<default_amount ? default_amount : (distance*multiplier);
+                float multiplier = (float)config.getInt("tp.multiplier")/100;
+                float distance = (float) sender.getLocation().distance(target.getLocation());
+                int amount = (distance*multiplier)<(float)default_amount ? default_amount : (int)Math.round(((float)distance*multiplier));
 
                 if(sender.getInventory().containsAtLeast(new ItemStack(Material.DIAMOND), amount)){
                     target.sendTitle("Stay still!", null);

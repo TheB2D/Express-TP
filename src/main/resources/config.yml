@@ -1,3 +1,3 @@
 tp:
-  multiplier: 0.1 # this value multiplies the distance of one player to another, the resulting amount will be the payment
-  default_amount: 3  # default payment, the least amount that a player will pay
+  multiplier: 0.1 # this value DIVIDED by 100, multiplies the distance of one player to a destination (min = 1)
+  default_amount: 3  # default payment, the least amount that a player will pay (min = 1)
