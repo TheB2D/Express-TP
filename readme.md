@@ -17,7 +17,6 @@ Looking for an alternative to nether portal highways in your SMP? Express-TP is 
 
 
 **Upcomming Features:**
-- Location warps with corresponding payment
 - More customizability (an example of this would be limits on how many times a command can be executed by a player)
 - Customizable currency (diamonds, netherite, emerald, etc.)
 
