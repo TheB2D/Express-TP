@@ -109,7 +109,6 @@ public class LocationTP implements CommandExecutor {
                 }
 
                 player.teleport(locations.getLocation(dest_name));
-                player.sendMessage((distance*multiplier) + "and" + default_amount + "values: " + multiplier + " and " + distance);
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&l&e(!)&r&7 Successfully teleported to " + dest_name + "! " + amount + " diamonds has been deducted from you!"));
                 player.getInventory().removeItem(new ItemStack(Material.DIAMOND, amount));
                 player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0F, 1.0F);
