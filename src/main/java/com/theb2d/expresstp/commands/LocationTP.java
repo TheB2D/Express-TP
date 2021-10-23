@@ -14,6 +14,7 @@ import org.bukkit.inventory.ItemStack;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 
 public class LocationTP implements CommandExecutor {
 
@@ -28,11 +29,6 @@ public class LocationTP implements CommandExecutor {
 
         if(command.getName().equalsIgnoreCase("ltp")){
             Player player = (Player) sender;
-
-            if(!(player.hasPermission("ltp.use"))){
-                player.sendMessage("§l§e(!)§r§c You are missing the required permission: §rltp.use§r§c to use this command!");
-                return true;
-            }
 
             File file = new File("locations.yml");
             FileConfiguration locations = YamlConfiguration.loadConfiguration(file);
@@ -102,15 +98,18 @@ public class LocationTP implements CommandExecutor {
                 float distance = (float) player.getLocation().distance(locations.getLocation(dest_name));
                 int amount = (distance*multiplier)<(float)default_amount ? default_amount : (int)Math.round(((float)distance*multiplier));
 
-                if(!(player.getInventory().containsAtLeast(new ItemStack(Material.DIAMOND), amount))){
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&l&e(!)&r&c You do not have enough resources to teleport to this location! Required resource: &r&l&b"+ Utils.getAmount(player, new ItemStack(Material.DIAMOND)) + "/"+ Integer.toString(amount) + "&r&c diamonds"));
+                String payment = config.getString("tp.payment_material");
+                ItemStack payment_IS = new ItemStack(Material.matchMaterial(payment.toUpperCase()));
+
+                if(!(player.getInventory().containsAtLeast(payment_IS, amount))){ //TODO
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&l&e(!)&r&c You do not have enough resources to teleport to this location! Required resource: &r&l&b"+ Utils.getAmount(player, payment_IS) + "/"+ Integer.toString(amount) + "&r&c " + payment.toLowerCase())); //TODO
                     player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0F, 1.0F);
                     return true;
                 }
 
                 player.teleport(locations.getLocation(dest_name));
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&l&e(!)&r&7 Successfully teleported to " + dest_name + "! " + amount + " diamonds has been deducted from you!"));
-                player.getInventory().removeItem(new ItemStack(Material.DIAMOND, amount));
+                player.getInventory().removeItem(new ItemStack(Material.getMaterial(payment), amount)); //TODO
                 player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0F, 1.0F);
             }
 

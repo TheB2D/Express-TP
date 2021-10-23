@@ -4,8 +4,6 @@ import com.theb2d.expresstp.commands.LocationTP;
 import com.theb2d.expresstp.commands.TPrequest;
 import com.theb2d.expresstp.events.Events;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class ExpressTp extends JavaPlugin {
@@ -17,6 +15,7 @@ public final class ExpressTp extends JavaPlugin {
         TPrequest TP_req = new TPrequest();
         Tp_loc = new LocationTP(this);
         events = new Events(this);
+
         getServer().getPluginManager().registerEvents(events, this);
         getServer().getConsoleSender().sendMessage("[ExpressTP] Plugin has been enabled" + ChatColor.GREEN);
         getCommand("etp").setExecutor(TP_req);

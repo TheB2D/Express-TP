@@ -16,11 +16,6 @@ public class TPrequest implements CommandExecutor {
         }
         Player player = (Player) sender;
 
-        if(!(sender.hasPermission("etp.use"))){
-            player.sendMessage("§l§e(!)§r§c You are missing the required permission: §retp.use§r§c to use this command!");
-            return true;
-        }
-
         if(command.getName().equalsIgnoreCase("etp")) {
             if (args.length == 0) {
                 sender.sendMessage("§l§e(!)§r§c Usage: §7/etp <player>");

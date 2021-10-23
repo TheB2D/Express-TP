@@ -1,3 +1,4 @@
 tp:
   multiplier: 0.1 # this value DIVIDED by 100, multiplies the distance of one player to a destination (min = 1)
   default_amount: 3  # default payment, the least amount that a player will pay (min = 1)
+  payment_material: DIAMOND # string here will be passed as a parameter in Material.matchMaterial()

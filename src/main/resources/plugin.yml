@@ -1,5 +1,5 @@
 name: ExpressTp
-version: ${project.version}
+version: 1.0.0
 main: com.theb2d.expresstp.ExpressTp
 api-version: 1.17
 authors: [ TheB2D ]
@@ -7,6 +7,16 @@ commands:
   etp:
     description: tp to a target with a corresponding payment
     usage: /<command> <player>
+    permission: etp.use
+    permission-message: You do not have permission to use this command
   ltp:
     description: tp to a location with a corresponding payment
     usage: /<command> <player>
+    permission: ltp.use
+    permission-message: You do not have permission to use this command
+  config:
+    description: modify the configuration of the plugin
+    usage: /<command> <category> <value>
+    permission: config.modify
+    permission-message: You do not have permission to use this command
+
