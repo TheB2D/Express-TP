@@ -28,23 +28,40 @@ public class LocationTP implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         if(command.getName().equalsIgnoreCase("ltp")){
+
+
             Player player = (Player) sender;
 
             File file = new File("locations.yml");
             FileConfiguration locations = YamlConfiguration.loadConfiguration(file);
+            List<String> location_list = locations.getKeys(false).stream().toList();
+
+
             if(!(sender instanceof Player)){
                 sender.getServer().getConsoleSender().sendMessage("You are not a player");
                 return true;
             }
 
             if(args.length==0){
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&l&e(!)&r&c Usage:&7 /ltp <location or action>"));
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&l&e(!)&r&c Usage:&7 /ltp <location or action> <optional: name>"));
                 return true;
             }
+
             if(args[0].equalsIgnoreCase("create")){
+
+                if(args.length!=2){
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&l&e(!)&r&c Usage:&7 /ltp <location or action> <optional: name>"));
+                    return true;
+                }
 
                 Location loc = player.getLocation();
                 String loc_name = args[1].toString();
+
+                if(locations.contains(args[1])){
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&l&e(!)&r&c This location already exists!"));
+                    return true;
+                }
+
 
                 if(!file.exists()){
                     try {
@@ -67,6 +84,12 @@ public class LocationTP implements CommandExecutor {
             }
 
             else if(args[0].equalsIgnoreCase("remove")){
+
+                if(args.length!=2){
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&l&e(!)&r&c Usage:&7 /ltp <location or action> <opti0nal: name>"));
+                    return true;
+                }
+
                 String loc = args[1].toString();
                 if(locations.contains(loc)){
                     locations.set(loc, null);
@@ -83,8 +106,8 @@ public class LocationTP implements CommandExecutor {
             }
 
             else if(args[0].equalsIgnoreCase("list")){
-                List<String> location_list = locations.getKeys(false).stream().toList();
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&r&6=============&l&b Warp List &r&6=============&a\n\n-"+String.join("\n-",location_list)+"\n\n&6==================================="));
+                String loc_list = (location_list.size()!=0) ? "&r&6=============&l&b Warp List &r&6=============&a\n\n"+String.join("\n",location_list)+"\n\n&6===================================" : "&l&e(!)&r&c No available location warps. Create a warp by /ltp create <name>"; // TODO: Check if this works
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', loc_list));
             }
 
             else if(locations.contains(args[0])){
@@ -108,8 +131,8 @@ public class LocationTP implements CommandExecutor {
                 }
 
                 player.teleport(locations.getLocation(dest_name));
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&l&e(!)&r&7 Successfully teleported to " + dest_name + "! " + amount + " diamonds has been deducted from you!"));
-                player.getInventory().removeItem(new ItemStack(Material.getMaterial(payment), amount)); //TODO
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&l&e(!)&r&7 Successfully teleported to " + dest_name + "! " + amount + " "+ payment.toLowerCase() + "s has been deducted from you!"));
+                player.getInventory().removeItem(new ItemStack(Material.getMaterial(payment), amount));
                 player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0F, 1.0F);
             }
 

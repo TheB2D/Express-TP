@@ -9,14 +9,11 @@ commands:
     usage: /<command> <player>
     permission: etp.use
     permission-message: You do not have permission to use this command
+    default: true
   ltp:
     description: tp to a location with a corresponding payment
     usage: /<command> <player>
     permission: ltp.use
     permission-message: You do not have permission to use this command
-  config:
-    description: modify the configuration of the plugin
-    usage: /<command> <category> <value>
-    permission: config.modify
-    permission-message: You do not have permission to use this command
+    default: true
 

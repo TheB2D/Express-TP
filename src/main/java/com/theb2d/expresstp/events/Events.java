@@ -2,10 +2,8 @@ package com.theb2d.expresstp.events;
 
 import com.theb2d.expresstp.ExpressTp;
 import com.theb2d.expresstp.handlers.MessageAwaiter;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import com.theb2d.expresstp.utils.Utils;
+import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -13,6 +11,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import java.util.Locale;
 
 public class Events implements Listener {
 
@@ -42,7 +42,10 @@ public class Events implements Listener {
                 float distance = (float) sender.getLocation().distance(target.getLocation());
                 int amount = (distance*multiplier)<(float)default_amount ? default_amount : (int)Math.round(((float)distance*multiplier));
 
-                if(sender.getInventory().containsAtLeast(new ItemStack(Material.DIAMOND), amount)){
+                String payment = config.getString("tp.payment_material");
+                ItemStack payment_IS = new ItemStack(Material.matchMaterial(payment.toUpperCase()));
+
+                if(sender.getInventory().containsAtLeast(payment_IS, amount)){
                     target.sendTitle("Stay still!", null);
                     new BukkitRunnable() {
                         @Override
@@ -50,14 +53,17 @@ public class Events implements Listener {
                             sender.teleport(targetLoc);
                         }
                     }.runTask(plugin);
-                    sender.getInventory().removeItem(new ItemStack(Material.DIAMOND, amount));
+
+                    // SUCCESS
+
+                    sender.getInventory().removeItem(new ItemStack(Material.matchMaterial(payment.toUpperCase()), 5));
                     sender.playSound(sender.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0F, 1.0F);
-                    sender.sendMessage("§l§e(!)§r§7 You have successfully been teleported to " + target.getDisplayName() + "! " + Integer.toString(amount) + " diamonds has been deducted from you!");
+                    sender.sendMessage("§l§e(!)§r§7 You have successfully been teleported to " + target.getDisplayName() + "! " + Integer.toString(amount) + " " + payment.toLowerCase() +"/s has been deducted from you!");
                 }
 
                 else{
                     sender.playSound(sender.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0F, 1.0F);
-                    sender.sendMessage("§l§e(!)§r§c You do not have enough resources to teleport to this person");
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&l&e(!)&r&c You do not have enough resources to teleport to this location! Required resource: &r&l&b"+ Utils.getAmount(sender, payment_IS) + "/"+ Integer.toString(amount) + "&r&c " + payment.toLowerCase())); //TODO
                 }
             }
 
