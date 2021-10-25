@@ -1,7 +1,7 @@
 name: ExpressTp
 version: 1.0.0
 main: com.theb2d.expresstp.ExpressTp
-api-version: 1.17
+api-version: 1.17.1
 authors: [ TheB2D ]
 commands:
   etp:
