@@ -18,8 +18,8 @@ Some Demo
 How good is this plugin?! These images of in-game usage will do the explaining for you!<br/><br/>
 
 
-<img src="images/demo1.png" alt="demo1" width="200"/></br></br>
-<img src="images/demo3.png" alt="demo3" width="200"/>
+<img src="images/demo1.png" alt="demo1" width="400"/></br></br>
+<img src="images/demo3.png" alt="demo3" width="400"/>
 
 
 Commands
