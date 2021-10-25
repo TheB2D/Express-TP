@@ -8,7 +8,7 @@ Looking for an alternative to nether portal highways in your SMP? Express-TP is 
 **Express-TP is:**
 - **Customizable** (customize the default payment, payment material)
 - **Dynamic** (customize the payment dynamically by adding a multiplier for how distant 2 locations are)
-- **SUPER user-friendly** Colored text, ver
+- **SUPER user-friendly** Colored text, argument feedback, responsive!
 ----------
 
 Some Demo
@@ -36,7 +36,7 @@ Supported Versions
 ---------------
 1.17.1
 
-------------
+---------------
 
 Contributing
 ---------------
