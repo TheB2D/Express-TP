@@ -44,4 +44,4 @@ Looking to contribute to the plugin? Just create a pull request
 
 Problems
 ---------------
-The plugin is not perfect. If there are any problems while using plugin, you can report them [here](https://github.com/TheB2D/Express-TP/issues/new)
+The plugin is not perfect. If there are any problems while using plugin, you can report them [here](https://github.com/TheB2D/Express-TP/issues/new). Please include full details of the problem/bug/error you encountered not just "PlUgIn BaD iT nO WoRK"
